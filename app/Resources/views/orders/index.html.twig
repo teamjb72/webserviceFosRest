@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Orders list</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Ordernumber</th>
+                <th>Orderdate</th>
+                <th>Requireddate</th>
+                <th>Shippeddate</th>
+                <th>Status</th>
+                <th>Comments</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for order in orders %}
+            <tr>
+                <td><a href="{{ path('orders_show', { 'ordernumber': order.ordernumber }) }}">{{ order.ordernumber }}</a></td>
+                <td>{% if order.orderdate %}{{ order.orderdate|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if order.requireddate %}{{ order.requireddate|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if order.shippeddate %}{{ order.shippeddate|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ order.status }}</td>
+                <td>{{ order.comments }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('orders_show', { 'ordernumber': order.ordernumber }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('orders_edit', { 'ordernumber': order.ordernumber }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('orders_new') }}">Create a new order</a>
+        </li>
+    </ul>
+{% endblock %}

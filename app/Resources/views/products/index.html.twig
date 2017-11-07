@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Products list</h1>
+
+    <<table class="table table-striped">
+
+        <thead>
+            <tr>
+                <th>Productcode</th>
+                <th>Productname</th>
+                <th>Productscale</th>
+                <th>Productvendor</th>
+                <th>Productdescription</th>
+                <th>Quantityinstock</th>
+                <th>Buyprice</th>
+                <th>Msrp</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td><a href="{{ path('products_show', { 'productcode': product.productcode }) }}">{{ product.productcode }}</a></td>
+                <td>{{ product.productname }}</td>
+                <td>{{ product.productscale }}</td>
+                <td>{{ product.productvendor }}</td>
+                <td>{{ product.productdescription }}</td>
+                <td>{{ product.quantityinstock }}</td>
+                <td>{{ product.buyprice }}</td>
+                <td>{{ product.msrp }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('products_show', { 'productcode': product.productcode }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('products_edit', { 'productcode': product.productcode }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('products_new') }}">Create a new product</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Offices list</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Officecode</th>
+                <th>City</th>
+                <th>Phone</th>
+                <th>Addressline1</th>
+                <th>Addressline2</th>
+                <th>State</th>
+                <th>Country</th>
+                <th>Postalcode</th>
+                <th>Territory</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for office in offices %}
+            <tr>
+                <td><a href="{{ path('offices_show', { 'officecode': office.officecode }) }}">{{ office.officecode }}</a></td>
+                <td>{{ office.city }}</td>
+                <td>{{ office.phone }}</td>
+                <td>{{ office.addressline1 }}</td>
+                <td>{{ office.addressline2 }}</td>
+                <td>{{ office.state }}</td>
+                <td>{{ office.country }}</td>
+                <td>{{ office.postalcode }}</td>
+                <td>{{ office.territory }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('offices_show', { 'officecode': office.officecode }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('offices_edit', { 'officecode': office.officecode }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('offices_new') }}">Create a new office</a>
+        </li>
+    </ul>
+{% endblock %}
